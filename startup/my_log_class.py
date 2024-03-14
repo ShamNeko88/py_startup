@@ -1,7 +1,3 @@
-import logging 
-from logging.handlers import RotatingFileHandler as r_handler
-
-
 """
 # logに関するクラス
 - モジュールとして呼び出す際はloggerの名前は__name__想定
@@ -14,6 +10,9 @@ from logging.handlers import RotatingFileHandler as r_handler
   - backup_cout  最大バイト超えたときに保持しておくファイル数
   - encoding     文字コード指定
 """
+
+import logging 
+from logging.handlers import RotatingFileHandler as r_handler
 
 class LogHandler():
     def __init__(self, logger_name, log_file=None, log_level=10, debug_mode=False, max_bytes=10000, backup_count=2, encoding="utf-8"):
