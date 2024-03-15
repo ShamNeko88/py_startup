@@ -13,7 +13,7 @@ try:
         debug_mode:bool = False
 except IndexError:
         debug_mode:bool = False
-l = LogHandler(__name__, log_file="log.txt", log_level=10, debug_mode=debug_mode, max_bytes=10000, backup_count=5, encoding="utf-8")
+l = LogHandler(__name__, log_file="./log/log.txt", log_level=10, debug_mode=debug_mode, max_bytes=10000, backup_count=5, encoding="utf-8")
 l.logger.debug("処理を開始しました。")
 
 
