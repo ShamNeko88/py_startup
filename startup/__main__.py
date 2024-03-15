@@ -1,7 +1,5 @@
 import sys
 from startup.my_log_class import LogHandler
-from startup.processing_class import Processing
-
 # ログ管理系のインスタンス生成
 try:
     if sys.argv[1] == "d":
@@ -16,13 +14,21 @@ l.logger.debug("処理を開始しました。")
 
 
 def main():
-    l.logger.debug("main関数の実行開始")
     # 処理クラスインスタンス生成
     pc = Processing()
     # プロジェクト名を入力
     pr_name:str = pc.input_str("プロジェクト名を入力してください")
 
-
+# 処理系クラス
+class Processing():
+    def __init__(self) -> None:
+        l.logger.debug("インスタンス生成")
+        # 必要なファイル
+        self.files:list = con.files
+    def input_str(self, txt):
+        # コマンドラインから文字列入力
+        l.logger.debug(f"コマンドラインから文字列入力：{txt}")
+        return input(f"{txt} >>>>  ")
 
 
 if __name__=="__main__":
