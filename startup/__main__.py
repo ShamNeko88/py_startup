@@ -58,7 +58,7 @@ class Processing():
         
         for x in range(len(files)):
             with open(f"./{con.output}/{pr_name}/{files[x]}", "w") as f:
-                f.write()
+                f.write("")
 
     
 
