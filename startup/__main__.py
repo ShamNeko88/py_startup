@@ -15,7 +15,7 @@ try:
 except IndexError:
         debug_mode:bool = False
 l = LogHandler(__name__, log_file="./log/log.txt", log_level=10, debug_mode=debug_mode, max_bytes=10000, backup_count=5, encoding="utf-8")
-l.logger.debug("処理を開始しました。")
+l.logger.debug("################# 処理を開始しました #############################")
 
 
 ######################################################################
@@ -23,32 +23,41 @@ l.logger.debug("処理を開始しました。")
 ######################################################################
 def main():
     # 処理クラスインスタンス生成
-    pc = Processing()
-
-    # プロジェクト名を入力
-    pr_name:str = pc.input_str("プロジェクト名を入力してください")
+    try:
+        pc = Processing()
+        l.logger.debug("処理クラスインスタンス生成")
+    except:
+        l.logger.error("処理クラスのインスタンスを生成できませんでした")
+    try:
+        # プロジェクト名を入力
+        pr_name:str = pc.input_str("プロジェクト名を入力してください")
+        l.logger.debug(f"プロジェクト名を取得しました：{pr_name}")
+    except:
+        l.logger.error("プロジェクト名を取得できませんでした")
 
     # 設定ファイルから必要なファイルとフォルダを取得
-    files:list = con.files
-    l.logger.debug(f"ファイル類：{files}")
-    dirs:list = con.dirs
-    dirs.append(pr_name)
-    l.logger.debug(f"フォルダ類：{dirs}")
+    try:
+        files:list = con.files
+        dirs:list = con.dirs
+        dirs.append(pr_name)
+        l.logger.debug("設定ファイルから必要なファイルとフォルダを取得しました")
+    except:
+        l.logger.error("設定ファイルから必要なファイル名とフォルダ名の取得ができませんでした")
+    # フォルダの作成、ファイル作成
+    try:
+        pc.maker(pr_name, dirs, files)
+        l.logger.debug("フォルダとファイル作成")
+    except:
+        l.logger.error("フォルダとファイルを作成できませんでした")
 
-    # フォルダの作成
-    pc.maker(pr_name, dirs, files)
 
 
 ######################################################################
 # 処理系クラス
 ######################################################################
 class Processing():
-    def __init__(self) -> None:
-        l.logger.debug("インスタンス生成")
-    
     # コマンドラインから文字列入力
     def input_str(self, txt):
-        l.logger.debug(f"コマンドラインから文字列入力：{txt}")
         return input(f"{txt} >>>>  ")
     
     # フォルダ作成、ファイル作成
