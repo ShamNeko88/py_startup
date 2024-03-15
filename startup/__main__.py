@@ -1,4 +1,5 @@
 import sys
+from startup import config as con
 from startup.my_log_class import LogHandler
 # ログ管理系のインスタンス生成
 try:
@@ -18,13 +19,18 @@ def main():
     pc = Processing()
     # プロジェクト名を入力
     pr_name:str = pc.input_str("プロジェクト名を入力してください")
+    # 設定ファイルから必要なファイルとフォルダを取得
+    files:list = con.files
+    l.logger.debug(f"ファイル類：{files}")
+    dirs:list = con.dirs
+    dirs.append(pr_name)
+    l.logger.debug(f"フォルダ類：{dirs}")
 
 # 処理系クラス
 class Processing():
     def __init__(self) -> None:
         l.logger.debug("インスタンス生成")
-        # 必要なファイル
-        self.files:list = con.files
+        
     def input_str(self, txt):
         # コマンドラインから文字列入力
         l.logger.debug(f"コマンドラインから文字列入力：{txt}")
