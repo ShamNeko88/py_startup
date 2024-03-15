@@ -17,6 +17,10 @@ l.logger.debug("処理を開始しました。")
 
 def main():
     l.logger.debug("main関数の実行開始")
+    # 処理クラスインスタンス生成
+    pc = Processing()
+    # プロジェクト名を入力
+    pr_name:str = pc.input_str("プロジェクト名を入力してください")
 
 
 
