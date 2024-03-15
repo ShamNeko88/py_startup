@@ -1,4 +1,5 @@
 import sys
+import os
 from startup import config as con
 from startup.my_log_class import LogHandler
 
@@ -34,6 +35,9 @@ def main():
     dirs.append(pr_name)
     l.logger.debug(f"フォルダ類：{dirs}")
 
+    # フォルダの作成
+    pc.maker(pr_name, dirs, files)
+
 
 ######################################################################
 # 処理系クラス
@@ -41,11 +45,22 @@ def main():
 class Processing():
     def __init__(self) -> None:
         l.logger.debug("インスタンス生成")
-
+    
+    # コマンドラインから文字列入力
     def input_str(self, txt):
-        # コマンドラインから文字列入力
         l.logger.debug(f"コマンドラインから文字列入力：{txt}")
         return input(f"{txt} >>>>  ")
+    
+    # フォルダ作成、ファイル作成
+    def maker(self, pr_name:str, dirs:list, files:list):
+        for i in range(len(dirs)):
+            os.makedirs(f"./{con.output}/{pr_name}/{dirs[i]}", exist_ok=True)
+        
+        for x in range(len(files)):
+            with open(f"./{con.output}/{pr_name}/{files[x]}", "w") as f:
+                f.write()
+
+    
 
 
 if __name__=="__main__":

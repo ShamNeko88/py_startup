@@ -2,6 +2,9 @@
 設定ファイル
 """
 
+# 出力フォルダ
+output:str = "result"
+
 # 必要なファイル
 files:list = ["README.md", ".gitignore"]
 
